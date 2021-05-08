@@ -54,73 +54,18 @@ public class Graphe {
 	
 	public ArrayList<Arc> twoOpt (){
 		int MAX = taille;
-		int[] sommets = new int [4];
+		int i1, i2;
+		do {
+			i1= (int)(Math.random()*MAX);
+			i2 =(int)(Math.random()*MAX);
+		}while(!current.get(i1).distinctSommets(current.get(i2)));
 		
-		for (int i = 0 ; i < MAX; i++)
-		{
-		        sommets[0] = (int)(Math.random()*MAX);
-
-		        while (sommets[1] == sommets[0])
-		        {
-		             sommets[1] = (int)(Math.random()*MAX);
-		        }
-		        while ((sommets[2] == sommets[0]) || (sommets[2] == sommets[1]) )
-		        {
-		             sommets[2] = (int)(Math.random()*MAX);
-		        }
-		        while ((sommets[3] == sommets[0]) || (sommets[3] == sommets[1]) || (sommets[3] == sommets[2]) )
-		        {
-		             sommets[3] = (int)(Math.random()*MAX);
-		        }
-		        
-
-		}
-		for (int i=0; i<4; i++) {
-			System.out.println("sommet"+i+ " = "+ sommets[i]);
-		}
-		Arc a1=null;
-		Arc a2=null;
+		Arc a1=current.get(i1);
+		Arc a2=current.get(i2);
 		
-		System.out.println(current);
-		for(int i=0; i<3; i++) {
-			for(int j=i+1;j<4;j++) {
-				System.out.println("sommet["+i+"] = "+sommets[i]);
-				System.out.println("sommet["+j+"] = "+sommets[j]);
-				
-				a1=getArcLink(sommets[i],sommets[j],current);
-				System.out.println("a1="+a1);
-				if(a1!=null) {
-					break;
-				}
-				
-			}
-			if(a1!=null) {
-				break;
-			}
-		}
-		System.out.println("a1 apres for ="+a1);
-		for(int k=0; k<3; k++) {
-			
-			for(int l=k+1;l<4 ;l++) {
-				//System.out.println(k!=i && k!=j && l!=i && l!=j);
-				//if((k!=i && l!=j) || (l!=i && k!=j)) {
-					
-					System.out.println("sommet["+k+"] = "+sommets[k]);
-					System.out.println("sommet["+l+"] = "+sommets[l]);
-					a2=getArcLink(sommets[k],sommets[l],current);
-					System.out.println("a2="+a2);
-					if(a2!=null && a2.distinctSommets(a1)==true) {
-						break;
-					}
-					
-				//}
-			}
-			if(a2!=null && a2.distinctSommets(a1)==true) {
-				break;
-			}
-		}
-		System.out.println("a1 définitif="+a1);
-		System.out.println("a2 définitif="+a2);
+		System.out.println(a1);
+		System.out.println(a2);
+		
 		ArrayList<Arc> neighbor = new ArrayList<>();
 		for(Arc a : current) {
 			if(!a.equals(a1) && !a.equals(a2)) {
@@ -128,11 +73,11 @@ public class Graphe {
 			}
 		}
 		
-		neighbor.add(getArcLink(a1.getSommet1(),a2.getSommet2(),Arcs));
-		neighbor.add(getArcLink(a1.getSommet2(),a2.getSommet1(),Arcs));
-		
+		neighbor.add(getArcLink(a1.getSommet1(),a2.getSommet1(),Arcs));
+		neighbor.add(getArcLink(a1.getSommet2(),a2.getSommet2(),Arcs));
+		System.out.println(current);
+		System.out.println(neighbor);
 		return neighbor;
-		//return current;
 		
 		
 	}
