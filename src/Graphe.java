@@ -9,8 +9,8 @@ public class Graphe {
 	public int scoreCurrent;
 	
 	
-	public Graphe(int taille) {
-		this.taille = taille;
+	public Graphe(int n) {
+		this.taille = n+4;
 		this.matrice = new int[taille][taille];
 		for (int l=0; l<taille; l++) {
 			for(int c=0; c<taille; c++) {
@@ -72,9 +72,13 @@ public class Graphe {
 				neighbor.add(a);
 			}
 		}
-		
-		neighbor.add(getArcLink(a1.getSommet1(),a2.getSommet1(),Arcs));
-		neighbor.add(getArcLink(a1.getSommet2(),a2.getSommet2(),Arcs));
+		if(current.contains(getArcLink(a1.getSommet1(),a2.getSommet1(),Arcs)) || current.contains(getArcLink(a1.getSommet2(),a2.getSommet2(),Arcs))){
+			neighbor.add(getArcLink(a1.getSommet1(),a2.getSommet2(),Arcs));
+			neighbor.add(getArcLink(a1.getSommet2(),a2.getSommet1(),Arcs));
+		}else {
+			neighbor.add(getArcLink(a1.getSommet1(), a2.getSommet1(), Arcs));
+			neighbor.add(getArcLink(a1.getSommet2(), a2.getSommet2(), Arcs));
+		}
 		System.out.println(current);
 		System.out.println(neighbor);
 		return neighbor;
