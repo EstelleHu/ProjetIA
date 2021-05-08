@@ -27,10 +27,11 @@ public class Arc {
         		|| (this.sommet1==c.sommet2 && this.sommet2==c.sommet1 && this.valeur==c.valeur);
     }
     public boolean distinctSommets(Arc c) {
-
-        // Compare the data members and return accordingly 
-        return (this.sommet1==c.sommet1 && this.sommet2==c.sommet2 && this.valeur==c.valeur)
-        		&& (this.sommet1==c.sommet2 && this.sommet2==c.sommet1 && this.valeur==c.valeur);
+    	if((this.sommet1!=c.sommet1 && this.sommet2!=c.sommet2) && (this.sommet1!=c.sommet2 && this.sommet2!=c.sommet1)){
+    		return true;
+    	}
+    	return false;
+        
     }
 	
 	@Override

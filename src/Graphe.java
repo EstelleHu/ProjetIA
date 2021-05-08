@@ -53,10 +53,10 @@ public class Graphe {
 	
 	
 	public ArrayList<Arc> twoOpt (){
-		int MAX = 4;
-		int[] sommets = new int [MAX];
+		int MAX = taille;
+		int[] sommets = new int [4];
 		
-		for (int i = 0 ; i <= MAX; i++)
+		for (int i = 0 ; i < MAX; i++)
 		{
 		        sommets[0] = (int)(Math.random()*MAX);
 
@@ -75,17 +75,17 @@ public class Graphe {
 		        
 
 		}
-
+		for (int i=0; i<4; i++) {
+			System.out.println("sommet"+i+ " = "+ sommets[i]);
+		}
 		Arc a1=null;
 		Arc a2=null;
 		
-		int i=0;
-		int j=0;
-		for(i=0; i<3; i++) {
-			
-			for(j=i+1;j<4;j++) {
-				System.out.println("i="+i);
-				System.out.println("j="+j);
+		System.out.println(current);
+		for(int i=0; i<3; i++) {
+			for(int j=i+1;j<4;j++) {
+				System.out.println("sommet["+i+"] = "+sommets[i]);
+				System.out.println("sommet["+j+"] = "+sommets[j]);
 				
 				a1=getArcLink(sommets[i],sommets[j],current);
 				System.out.println("a1="+a1);
@@ -98,24 +98,24 @@ public class Graphe {
 				break;
 			}
 		}
-
+		System.out.println("a1 apres for ="+a1);
 		for(int k=0; k<3; k++) {
 			
 			for(int l=k+1;l<4 ;l++) {
 				//System.out.println(k!=i && k!=j && l!=i && l!=j);
 				//if((k!=i && l!=j) || (l!=i && k!=j)) {
 					
-					System.out.println("k="+k);
-					System.out.println("l="+l);
+					System.out.println("sommet["+k+"] = "+sommets[k]);
+					System.out.println("sommet["+l+"] = "+sommets[l]);
 					a2=getArcLink(sommets[k],sommets[l],current);
 					System.out.println("a2="+a2);
-					if(a2!=null && a2.distinctSommets(a1)) {
+					if(a2!=null && a2.distinctSommets(a1)==true) {
 						break;
 					}
 					
 				//}
 			}
-			if(a2!=null && a2.distinctSommets(a1)) {
+			if(a2!=null && a2.distinctSommets(a1)==true) {
 				break;
 			}
 		}
