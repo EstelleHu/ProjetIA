@@ -63,8 +63,8 @@ public class Graphe {
 		Arc a1=current.get(i1);
 		Arc a2=current.get(i2);
 		
-		System.out.println(a1);
-		System.out.println(a2);
+//		System.out.println("Arc 1 : "+a1);
+//		System.out.println("Arc 2 : "+a2);
 		
 		ArrayList<Arc> neighbor = new ArrayList<>();
 		for(Arc a : current) {
@@ -79,8 +79,8 @@ public class Graphe {
 			neighbor.add(getArcLink(a1.getSommet1(), a2.getSommet1(), Arcs));
 			neighbor.add(getArcLink(a1.getSommet2(), a2.getSommet2(), Arcs));
 		}
-		System.out.println(current);
-		System.out.println(neighbor);
+//		System.out.println(current);
+//		System.out.println(neighbor);
 		return neighbor;
 		
 		
@@ -107,5 +107,16 @@ public class Graphe {
 	public int[][] getMatrice() {
 		return matrice;
 	}
+	public ArrayList<Arc>  getCurrent(){
+		return this.current;
+	}
 
+	public void setCurrent(ArrayList<Arc> neighbor) {
+		int i=0;
+		for (Arc c: neighbor){
+			current.set(i,c);
+			i++;
+		}
+//		System.out.println("NEW CURRENT : "+this.current);
+	}
 }

@@ -9,12 +9,22 @@ public class HillClimbing {
 		}
 		return somme;
 	}
-	public void search(Graphe g) {
-		int compteur = 0;
-		
-		do {
-			
-		}while(compteur<g.getTaille()-1);
+	public ArrayList<Arc> search(Graphe g) {
+		ArrayList<Arc> current = g.getCurrent();
+		System.out.println( "CURRENT :"+current);
+		int i=0;
+		while (true){
+			ArrayList<Arc> neighbor =  g.twoOpt();
+			System.out.println( "Etape "+i+"  neighbor : "+neighbor);
+			System.out.println("current heuristic "+heuristic(current) +" VS neighbor heuristic "+heuristic(neighbor));
+			if(heuristic(current)<= heuristic(neighbor) ){
+				System.out.println("Chemin le plus court, resultant du HILL CLIMBING SEARCH :\n"+current);
+				System.out.println("Longueur du chemin = "+ heuristic(current));
+				return current;
+			}
+			i++;
+			g.setCurrent( neighbor);
+		}
 	}
 	
 	public int h(int[]ligne, int[]resultat) {
