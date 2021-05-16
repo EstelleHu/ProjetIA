@@ -7,15 +7,23 @@ public class Main {
 		HillClimbing hc= new HillClimbing();
 		System.out.println("Le graphe est de taille= " +(n+4));
 		g.affiche();
-		//System.out.println(g.toString());
-		ArrayList<Arc> a = g.twoOpt();
-
+		//Hill Climbing search 
+		
 //		System.out.println(a.size());
-		System.out.println("TEST 1 \n");
+		/*System.out.println("TEST 1 \n");
 		hc.search(g);
 		System.out.println("TEST 2 \n");
 		hc.search(g);
 		System.out.println("TEST 3 \n");
-		hc.search(g);
+		hc.search(g);*/
+		
+		//Stochastic Hill Climbing search
+		Stochastic s= new Stochastic();
+		System.out.println("TEST 1 \n");
+		s.search(g);
+		/*System.out.println("TEST 2 \n");
+		s.search(g);
+		System.out.println("TEST 3 \n");
+		s.search(g);*/
 	}
 }

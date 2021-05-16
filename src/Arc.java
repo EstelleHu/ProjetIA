@@ -36,7 +36,7 @@ public class Arc {
 	
 	@Override
 	public String toString() {
-		return "Arc [sommet1=" + sommet1 + ", sommet2=" + sommet2 + ", valeur=" + valeur + "]";
+		return "Arc [sommet1=" + sommet1 + ", sommet2=" + sommet2 + ", valeur=" + valeur + "]\n";
 	}
 
 
