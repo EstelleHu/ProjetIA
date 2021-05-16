@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Graphe {
 	private int[][] matrice;
@@ -33,12 +34,48 @@ public class Graphe {
 				}
 			}
 		}
-		for (int i=0; i<taille-1; i++) {
-			current.add(getArcLink(i,i+1, Arcs));
+		for (int i = 0; i < taille - 1; i++) {
+			current.add(getArcLink(i, i + 1, Arcs));
 		}
-		current.add(getArcLink(0,taille-1, Arcs));
+		current.add(getArcLink(0, taille - 1, Arcs));
+
+		//val de distance ==0 normal ?
+		//System.out.println("CURRENT 3 "+current);
 	}
-	
+	public void randomizeCurrent() {
+		current =new ArrayList<>();
+		int i=0;
+		ArrayList<Arc> chosen =chooseCurrentRandomly();
+		for (Arc c: chosen){
+			this.current.add(chosen.get(i));
+			i++;
+		}
+	}
+
+	public ArrayList<Arc> chooseCurrentRandomly() {
+		ArrayList<Arc> chosen = new ArrayList<>();
+		int[] statesId =new int[taille];
+		for (int i=0;i<taille;i++){
+			statesId[i]=i;
+		}
+		Random rnd = new Random();
+		for (int i = statesId.length - 1; i > 0; i--) {
+			int index = rnd.nextInt(i + 1);
+			// Simple swap
+			int a = statesId[index];
+			statesId[index] = statesId[i];
+			statesId[i] = a;
+		}
+		//on verifie que la combinaison n'a pas déjà été testée ?
+		for (int i = 0; i < statesId.length-1; i++){
+			chosen.add(getArcLink(statesId[i], statesId[i+1] , Arcs));
+		}
+		//rajouter la dernière liaison
+		chosen.add(getArcLink(statesId[0], statesId[taille - 1], Arcs));
+		System.out.println("PROPOSITION "+chosen);
+		return chosen;
+	}
+
 	public Arc getArcLink(int sommet1, int sommet2, ArrayList<Arc> ArcList) {
 		for(Arc a : ArcList) {
 			if((a.getSommet1()==sommet1 && a.getSommet2()==sommet2) || (a.getSommet1()==sommet2 && a.getSommet2()==sommet1)) {
@@ -86,14 +123,14 @@ public class Graphe {
 		
 	}
 	public ArrayList<ArrayList<Arc>> twoOptNeighbors(){
-		this.neighborsOfCurrent = new ArrayList<ArrayList<Arc>>();
+		this.neighborsOfCurrent = new ArrayList<>();
 		for(int i=0; i<current.size();i++) {
 			for(int j=i+1; j<current.size();j++) {
 				Arc a1=current.get(i);
 				Arc a2=current.get(j);
 				if(a1.distinctSommets(a2)) {
-					System.out.println("a1 = " +a1);
-					System.out.println("a2 = " +a2);
+//					System.out.println("a1 = " +a1);
+//					System.out.println("a2 = " +a2);
 					ArrayList<Arc> neighbor = new ArrayList<>();
 					for(Arc a : current) {
 						if(!a.equals(a1) && !a.equals(a2)) {
@@ -151,4 +188,6 @@ public class Graphe {
 		}
 //		System.out.println("NEW CURRENT : "+this.current);
 	}
+
+
 }
