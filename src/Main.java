@@ -35,19 +35,19 @@ public class Main {
 
 
 		//Simulated Annealing Test
-		System.out.println(" \n TEST Simulated Annealing \n");
-		sa.simulatedAnnealingSearch(g,1);
+//		System.out.println(" \n TEST Simulated Annealing \n");
+//		sa.simulatedAnnealingSearch(g,1);
 
 //		//Local Beam Search Test
-		System.out.println(" \n TEST Local Beam Search \n");
-		System.out.println(localBeam.LBSAlgorithm(2,g));
+//		System.out.println(" \n TEST Local Beam Search \n");
+//		System.out.println(localBeam.LBSAlgorithm(2,g));
 
 		// Genetic Algorithm
 		System.out.println(" \n TEST Genetic Algorithm \n");
-		System.out.println("POPULATION : "); // NB a revoir
+		System.out.println("FIRST POPULATION : "); // NB a revoir
 		System.out.println(genetic.getPopulation());
 		System.out.println("SEARCH");
-		genetic.geneticSearch(genetic.crossover(genetic.selection()),1);
+		genetic.geneticSearch(genetic.crossover(100));
 
 	}
 }
