@@ -17,7 +17,7 @@ public class HillClimbing {
 			System.out.println("current heuristic "+heuristic(g.getCurrent()) +" VS neighbor heuristic "+heuristic(neighbor));
 			if(heuristic(g.getCurrent())<= heuristic(neighbor) ){
 				System.out.println("Chemin le plus court, resultant du FIRST CHOICE HILL CLIMBING SEARCH :\n"+g.getCurrent());
-				System.out.println("Longueur du chemin minimal trouvé par First choice hill climbing = "+ heuristic(g.getCurrent()));
+				System.out.println("Longueur du chemin minimal trouvï¿½ par First choice hill climbing = "+ heuristic(g.getCurrent()));
 				return g.getCurrent();
 			}
 			i++;
@@ -33,12 +33,12 @@ public class HillClimbing {
 			System.out.println( "Etape "+i+ ":");
 			ArrayList<Integer> hList = h(g.getNeighborsOfCurrent());
 			System.out.println("current heuristic "+heuristic(g.getCurrent()) +" VS neighbor heuristic "+hList);
-			
+
 			i++;
 			int chosenNeighbor = posOfSmallerPathNeighbor(heuristic(g.getCurrent()),hList);
 			if(chosenNeighbor==-1) {
 				System.out.println("Chemin le plus court, resultant du HILL CLIMBING SEARCH :\n"+g.getCurrent());
-				System.out.println("Longueur du chemin trouvé par Hill climbing= "+ heuristic(g.getCurrent()));
+				System.out.println("Longueur du chemin trouvï¿½ par Hill climbing= "+ heuristic(g.getCurrent()));
 				return g.getCurrent();
 			}
 			System.out.println("current : "+g.getCurrent());
@@ -87,11 +87,11 @@ public class HillClimbing {
 			ArrayList<Arc> resOfHC = search(g);
 			System.out.println(" LAST CHOSEN "+lastChosen);
 			System.out.println(" NEW RES OF HS "+resOfHC);
-			System.out.println("COMPARING DISTANCES : " + heuristic(lastChosen) + " with " + heuristic(resOfHC));
-			if (heuristic(lastChosen) <= heuristic(resOfHC)) {
+			System.out.println("COMPARING DISTANCES : " + Graphe.heuristic(lastChosen) + " with " + Graphe.heuristic(resOfHC));
+			if (Graphe.heuristic(lastChosen) <= Graphe.heuristic(resOfHC)) {
 				System.out.println("Fin de la recherche Random-restart hill climbing :");
 				System.out.println("Chemin le plus court, resultant du Random-restart HILL CLIMBING SEARCH :\n" + lastChosen);
-				System.out.println("Longueur du chemin = " + heuristic(lastChosen));
+				System.out.println("Longueur du chemin = " + Graphe.heuristic(lastChosen));
 				return lastChosen;
 			}
 			int k=0;

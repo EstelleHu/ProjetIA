@@ -9,13 +9,13 @@ public class Stochastic extends HillClimbing{
 			g.twoOptNeighbors();
 			System.out.println( "Etape "+i+"  neighbor : "+ g.getNeighborsOfCurrent());
 			ArrayList<Integer> hList = h(g.getNeighborsOfCurrent());
-			System.out.println("current heuristic "+heuristic(g.getCurrent()) +" VS neighbor heuristic "+hList);
+			System.out.println("current heuristic "+ Graphe.heuristic(g.getCurrent()) +" VS neighbor heuristic "+hList);
 			
 			i++;
-			int chosenNeighbor = posOfNeighbor(heuristic(g.getCurrent()),hList);
+			int chosenNeighbor = posOfNeighbor(Graphe.heuristic(g.getCurrent()),hList);
 			if(chosenNeighbor==-1) {
 				System.out.println("Chemin le plus court, resultant du STOCHASTIC HILL CLIMBING SEARCH :\n"+g.getCurrent());
-				System.out.println("Longueur du chemin = "+ heuristic(g.getCurrent()));
+				System.out.println("Longueur du chemin = "+ Graphe.heuristic(g.getCurrent()));
 				return g.getCurrent();
 			}
 			System.out.println("current : "+g.getCurrent());
@@ -24,7 +24,7 @@ public class Stochastic extends HillClimbing{
 			
 		}
 	}
-	
+
 	public int posOfNeighbor(int hcurrent, ArrayList<Integer> hList) {
 		ArrayList<Integer> pos = new ArrayList<Integer>();
 		for(int i=0; i<hList.size();i++) {

@@ -150,7 +150,32 @@ public class Graphe {
 		}
 		return neighborsOfCurrent;
 	}
-		
+	public ArrayList<ArrayList<Arc>> twoOptNeighborsOf(ArrayList<Arc> cur){
+		this.neighborsOfCurrent = new ArrayList<>();
+		for(int i=0; i<cur.size();i++) {
+			for(int j=i+1; j<cur.size();j++) {
+				Arc a1=cur.get(i);
+				Arc a2=cur.get(j);
+				if(a1.distinctSommets(a2)) {
+					ArrayList<Arc> neighbor = new ArrayList<>();
+					for(Arc a : cur) {
+						if(!a.equals(a1) && !a.equals(a2)) {
+							neighbor.add(a);
+						}
+					}
+					if(cur.contains(getArcLink(a1.getSommet1(),a2.getSommet1(),Arcs)) || cur.contains(getArcLink(a1.getSommet2(),a2.getSommet2(),Arcs))){
+						neighbor.add(getArcLink(a1.getSommet1(),a2.getSommet2(),Arcs));
+						neighbor.add(getArcLink(a1.getSommet2(),a2.getSommet1(),Arcs));
+					}else{
+						neighbor.add(getArcLink(a1.getSommet1(), a2.getSommet1(), Arcs));
+						neighbor.add(getArcLink(a1.getSommet2(), a2.getSommet2(), Arcs));
+					}
+					neighborsOfCurrent.add(neighbor);
+				}
+			}
+		}
+		return neighborsOfCurrent;
+	}
 	
 	public ArrayList<ArrayList<Arc>> getNeighborsOfCurrent() {
 		return neighborsOfCurrent;
@@ -187,6 +212,13 @@ public class Graphe {
 			i++;
 		}
 //		System.out.println("NEW CURRENT : "+this.current);
+	}
+	public static int heuristic(ArrayList<Arc> current) {
+		int somme = 0;
+		for(Arc a : current) {
+			somme = somme + a.getValeur();
+		}
+		return somme;
 	}
 
 
