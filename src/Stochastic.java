@@ -24,13 +24,7 @@ public class Stochastic extends HillClimbing{
 			
 		}
 	}
-	public ArrayList<Integer> h (ArrayList<ArrayList<Arc>> neighbors){
-		ArrayList<Integer> hList = new ArrayList<Integer>();
-		for(int i = 0; i < neighbors.size(); i++) {
-			hList.add(heuristic(neighbors.get(i)));
-		}
-		return hList;
-	}
+	
 	public int posOfNeighbor(int hcurrent, ArrayList<Integer> hList) {
 		ArrayList<Integer> pos = new ArrayList<Integer>();
 		for(int i=0; i<hList.size();i++) {

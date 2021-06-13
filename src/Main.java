@@ -2,12 +2,14 @@ import java.util.ArrayList;
 
 public class Main {
 	public static void main (String[] args) {
-		int n= 1;
+		int n= 2;
 		Graphe g = new Graphe(n);
 		HillClimbing hc= new HillClimbing();
 		System.out.println("Le graphe est de taille= " +(n+4));
 		g.affiche();
-		//Hill Climbing search
+		
+		
+		//First Choice Hill Climbing search
 
 //		System.out.println(a.size());
 		/*System.out.println("TEST 1 \n");
@@ -23,8 +25,18 @@ public class Main {
 //		s.search(g);
 
 		//TESTING Random-restart hill climbing
-		g.randomizeCurrent();
-		hc.searchRandomRestartHC(g);
-
+		//g.randomizeCurrent();
+		//hc.searchRandomRestartHC(g);
+		
+		// Genetic Algorithm
+		/*GeneticAlgorithm genetic = new GeneticAlgorithm(5,g);
+		System.out.println("POPULATION");
+		System.out.println(genetic.getPopulation());
+		System.out.println("SEARCH");
+		genetic.search(genetic.crossover(genetic.selection()));*/
+		
+		//Hill Climbing search
+		hc.searchHC(g);
+		
 	}
 }
