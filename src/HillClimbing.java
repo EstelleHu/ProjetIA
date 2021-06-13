@@ -9,46 +9,32 @@ public class HillClimbing {
 		}
 		return somme;
 	}
-	public ArrayList<Arc> search(Graphe g) { //First choice hill climbing
-		int i=0;
-		while (true){
-			ArrayList<Arc> neighbor =  g.twoOpt();
-			System.out.println( "Etape "+i+" : ");
-			System.out.println("current heuristic "+heuristic(g.getCurrent()) +" VS neighbor heuristic "+heuristic(neighbor));
-			if(heuristic(g.getCurrent())<= heuristic(neighbor) ){
-				System.out.println("Chemin le plus court, resultant du FIRST CHOICE HILL CLIMBING SEARCH :\n"+g.getCurrent());
-				System.out.println("Longueur du chemin minimal trouv� par First choice hill climbing = "+ heuristic(g.getCurrent()));
-				return g.getCurrent();
-			}
-			i++;
-			g.setCurrent( neighbor);
-		}
-	}
-	
-	public ArrayList<Arc> searchHC(Graphe g) {
-		System.out.println( "CURRENT :"+g.getCurrent());
+	//HILL CLIMBING SEARCH ALGO
+	public ArrayList<Arc> HCsearch(Graph g) {
+//		System.out.println( "CURRENT :"+g.getCurrent());
 		int i=1;
 		while (true){
 			g.twoOptNeighbors();
-			System.out.println( "Etape "+i+ ":");
-			ArrayList<Integer> hList = h(g.getNeighborsOfCurrent());
-			System.out.println("current heuristic "+heuristic(g.getCurrent()) +" VS neighbor heuristic "+hList);
+			System.out.println( "Step "+i+ ":");
+			ArrayList<Integer> hList = heuristicsOfNeighbors(g.getNeighborsOfCurrent());
+			System.out.println("Current heuristic "+heuristic(g.getCurrent()) +" VS neighbor heuristic "+hList);
 
 			i++;
 			int chosenNeighbor = posOfSmallerPathNeighbor(heuristic(g.getCurrent()),hList);
 			if(chosenNeighbor==-1) {
-				System.out.println("Chemin le plus court, resultant du HILL CLIMBING SEARCH :\n"+g.getCurrent());
-				System.out.println("Longueur du chemin trouv� par Hill climbing= "+ heuristic(g.getCurrent()));
+				System.out.println("Resulting path of HILL CLIMBING SEARCH algorithm :\n"+g.getCurrent());
+				System.out.println("Path's length = "+ heuristic(g.getCurrent()));
 				return g.getCurrent();
 			}
-			System.out.println("current : "+g.getCurrent());
 			g.setCurrent(g.getNeighborsOfCurrent().get(chosenNeighbor));
-			System.out.println("Heuristic of neighbor chosen : "+ heuristic(g.getCurrent()));
-			System.out.println("neighbor chosen : "+ g.getCurrent());
+//			System.out.println("Heuristic of neighbor chosen : "+ heuristic(g.getCurrent()));
+//			System.out.println("neighbor chosen : "+ g.getCurrent());
 		}
 	}
-	public ArrayList<Integer> h (ArrayList<ArrayList<Arc>> neighbors){
-		ArrayList<Integer> hList = new ArrayList<Integer>();
+
+	// Tools
+	public ArrayList<Integer> heuristicsOfNeighbors (ArrayList<ArrayList<Arc>> neighbors){
+		ArrayList<Integer> hList = new ArrayList<>();
 		for(int i = 0; i < neighbors.size(); i++) {
 			hList.add(heuristic(neighbors.get(i)));
 		}
@@ -65,40 +51,16 @@ public class HillClimbing {
 		}
 		return pos;
 	}
-	public int h(int[]ligne, int[]resultat) {
-		int min = ligne[0];
-		for(int i=1;i<ligne.length-1;i++) {
-			if(ligne[i]<min) {
-				min=ligne[i];
+	public int posOfNeighbor(int hcurrent, ArrayList<Integer> hList) {
+		ArrayList<Integer> pos = new ArrayList<Integer>();
+		for(int i=0; i<hList.size();i++) {
+			if(hList.get(i)<hcurrent) {
+				pos.add(i);
 			}
 		}
-		return min;
-	}
-	public ArrayList<Arc> searchRandomRestartHC(Graphe g) {
-		ArrayList<Arc> lastChosen= new ArrayList<>();
-		ArrayList<Arc> res = search(g);
-		int e=0;
-		for (Arc a : res){
-			lastChosen.add(e,a);
-			e++;
+		if(pos.size()==0) {
+			return -1;
 		}
-		while (true) {
-			g.setCurrent(g.chooseCurrentRandomly());
-			ArrayList<Arc> resOfHC = search(g);
-			System.out.println(" LAST CHOSEN "+lastChosen);
-			System.out.println(" NEW RES OF HS "+resOfHC);
-			System.out.println("COMPARING DISTANCES : " + Graphe.heuristic(lastChosen) + " with " + Graphe.heuristic(resOfHC));
-			if (Graphe.heuristic(lastChosen) <= Graphe.heuristic(resOfHC)) {
-				System.out.println("Fin de la recherche Random-restart hill climbing :");
-				System.out.println("Chemin le plus court, resultant du Random-restart HILL CLIMBING SEARCH :\n" + lastChosen);
-				System.out.println("Longueur du chemin = " + Graphe.heuristic(lastChosen));
-				return lastChosen;
-			}
-			int k=0;
-			for (Arc a : resOfHC){
-				lastChosen.set(k,a);
-				k++;
-			}
-		}
+		return pos.get((int)(Math.random()*pos.size()));
 	}
 }

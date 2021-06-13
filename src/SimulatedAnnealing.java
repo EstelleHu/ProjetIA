@@ -4,7 +4,6 @@ public class SimulatedAnnealing {
     // Simulated Annealing parameters
 
     // Temperature at which iteration terminates
-//    static final double Tmin = .0001;
     static final double Tmin = 0.0001;
 
     // Decrease in temperature
@@ -15,46 +14,28 @@ public class SimulatedAnnealing {
     static final int numIterations = 25;
 
 
-    public ArrayList<Arc> simulatedAnnealingSearch(Graphe g,ArrayList<Arc> initial,double startingTemperature){
-//        System.out.println("INITIAL :"+initial);
-        ArrayList<Arc> current = initial;
-//        System.out.println("CURRENT :"+current);
+    public ArrayList<Arc> simulatedAnnealingSearch(Graph g,double startingTemperature){
+        ArrayList<Arc> current = g.getCurrent();
         ArrayList<Arc> next;
         double T=startingTemperature;
 
-            for(int i=0;i<numIterations;i++){
-                while(T>Tmin){
-//                if(T==0){
-//                    System.out.println("END OF ALGO WITH RESULT :"+current);
-//                    return current;
-//                }
+        for(int i=0;i<numIterations;i++) {
+            while (T > Tmin) {
                 g.setCurrent(current);
                 next = g.twoOpt(); // random neighbor of current
-//            System.out.println("next :"+next);
-                System.out.println("prob :"+Math.pow(Math.E,(heuristic(next)-heuristic(current)/T)));
-                if(heuristic(current)>heuristic(next))
-                    current=next;
-                else{
-                    double rand=Math.random();
-                    System.out.println("rand :" +rand +" T : "+ T +" current h :"+heuristic(current)+ " next h : "+heuristic(next));
-                    boolean b= Math.pow(Math.E,(heuristic(next)-heuristic(current)/T))< rand;
-                    System.out.println( " result "+ b);
-                    if(b)
-                        current=next;
+//                System.out.println("Variables : \n T : " + T + "\n current's heuristic :" + (Graphe.heuristic(current) * 0.01) + "\n next path's heurostic : " + (Graphe.heuristic(next) * 0.01));
+
+                if ((Graph.heuristic(current) * 0.01) > (Graph.heuristic(next) * 0.01))
+                    current = next;
+                else if (Math.pow(Math.E, ((Graph.heuristic(next) * 0.01) - (Graph.heuristic(current) * 0.01) / T)) < Math.random()) {
+//                    System.out.println("prob :" + Math.pow(Math.E, ((Graphe.heuristic(next) * 0.01) - (Graphe.heuristic(current) * 0.01) / T)));
+                    current = next;
                 }
                 T *= alpha;
             }
-
         }
-        System.out.println("2 END OF ALGO WITH RESULT :"+current);
+        System.out.println("Result OF Simulated Annealing ALGO  :"+current);
+        System.out.println("Path length " + Graph.heuristic(current));
         return current;
     }
-    public static double heuristic(ArrayList<Arc> current) {
-        int somme = 0;
-        for(Arc a : current) {
-            somme = somme + a.getValeur();
-        }
-        return somme*0.01;
-    }
-    
 }

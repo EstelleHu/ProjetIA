@@ -2,56 +2,45 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-
-
-
-
-
 public class GeneticAlgorithm extends Stochastic{
-	private Graphe g;
-	private ArrayList<ArrayList<Arc>> population = new ArrayList<ArrayList<Arc>>();
+	private Graph g;
+	private ArrayList<ArrayList<Arc>> population = new ArrayList<>();
 
-	public GeneticAlgorithm(int k, Graphe g) {
+	public GeneticAlgorithm(int k, Graph g) {
 		this.g = g;
 		for(int i=0; i<k; i++) {
 			this.population.add(g.chooseCurrentRandomly());
 		}
 	}
-	
-	
-	public ArrayList<Arc> search (int[][] population, int nb){
+	public ArrayList<Arc> geneticSearch (int[][] population, int nb){
 
-			ArrayList<ArrayList<Arc>> populationList = new ArrayList<ArrayList<Arc>>();
+			ArrayList<ArrayList<Arc>> populationList = new ArrayList<>();
 			
 			for(int i=0;i<population.length;i++) {
 				populationList.add(ArrayToArcs(population[i]));
 			}
-			ArrayList<Arc> cheminMin = populationList.get(0);
+			ArrayList<Arc> minPath = populationList.get(0);
 			for(int i=1; i<populationList.size()-1;i++){
-				System.out.println("heuristic courante = " + heuristic(populationList.get(i)));
-				if(heuristic(populationList.get(i))<heuristic(cheminMin)) {
-					System.out.println("Heuristic du chemin le plus court actuel = "+ heuristic(cheminMin));
-					cheminMin=populationList.get(i);
+				if(heuristic(populationList.get(i))<heuristic(minPath)) {
+					minPath=populationList.get(i);
 				}
 			}
-			System.out.println("Heuristic du chemin le plus court final = "+ heuristic(cheminMin));
-			System.out.println("Le chemin le plus court = "+ cheminMin);
+			System.out.println("Min Path's heuristic = "+ heuristic(minPath));
+			System.out.println("Resulting Path= "+ minPath);
 
-			return cheminMin;
+			return minPath;
 	}
 	public ArrayList<ArrayList<Arc>> getPopulation() {
 		return population;
 	}
-	public void setPopulation(ArrayList<ArrayList<Arc>> population) {
-		this.population = population;
-	}
+
 	public ArrayList<ArrayList<Arc>> selection(){
 		ArrayList<ArrayList<Arc>> couples = new ArrayList<>();
 		RandomSelector r = new RandomSelector();
 		Iterator<ArrayList<Arc>> it = this.population.iterator();
 		while(it.hasNext())
-			r.add(heuristic(it.next())); //r va choisir un élément
-		// aléatoirement proportionnellement aux valeurs de fitness.
+			r.add(heuristic(it.next())); //r va choisir un ï¿½lï¿½ment
+		// alï¿½atoirement proportionnellement aux valeurs de fitness.
 
 		for(int i = 0;i<this.population.size()/2; i++) {
 			//premier parent
@@ -81,10 +70,10 @@ public class GeneticAlgorithm extends Stochastic{
 		for(int i=0; i<parents.size();i++) {
 			if(i%2==0) {
 				System.out.println("PARENT 1");
-				afficheTableau(parentsTab[i]);
+				arrayToString(parentsTab[i]);
 				
 				System.out.println("PARENT 2");
-				afficheTableau(parentsTab[i+1]);
+				arrayToString(parentsTab[i+1]);
 				
 				int[] firstChild = new int[g.getTaille()];
 				initializeToMinusOne(firstChild);
@@ -135,21 +124,17 @@ public class GeneticAlgorithm extends Stochastic{
 				}
 				Random random = new Random();
 				if(random.nextInt(10) == 9){ //1 chance sur 10 que l'enfant fasse une mutation
-					System.out.println("avant mutation CHILD 1" );
-					afficheTableau(secondChild);
 					mutation(firstChild);
 				}
 				if(random.nextInt(10) == 9){ //1 chance sur 10 que l'enfant fasse une mutation
-					System.out.println("avant mutation CHILD 2" );
-					afficheTableau(secondChild);
 					mutation(secondChild);
 				}
 				newPop[i]=firstChild;
 				newPop[i+1]=secondChild;
 				System.out.println("CHILD 1");
-				afficheTableau(newPop[i]);
+				arrayToString(newPop[i]);
 				System.out.println("CHILD 2");
-				afficheTableau(newPop[i+1]);
+				arrayToString(newPop[i+1]);
 			}
 		}
 		return newPop;
@@ -167,8 +152,6 @@ public class GeneticAlgorithm extends Stochastic{
 			a = b;
 			b = c;
 		}
-		System.out.println("a = "+a);
-		System.out.println("b = "+b);
 		while(a<b) {
 			int tmp = child[a];
 			child[a] = child[b];
@@ -177,17 +160,7 @@ public class GeneticAlgorithm extends Stochastic{
 			b--;
 		}
 	}
-	
-	public int indexFromElement(ArrayList<Arc> list, Arc a) {
-		//System.out.println("DANS INDEX FROM ELEMENT");
-		//System.out.println(g.getArcLink(a.getSommet1(), a.getSommet2(), list));
-		for(int i=0; i < list.size();i++) {
-			if(list.get(i).equals(a)) {
-				return i;
-			}
-		}
-		return -1;
-	}
+
 	public int contains(int[] tab, int sommet) {
 		for (int i=0; i<tab.length;i++) {
 			if(tab[i]==sommet) {
@@ -195,7 +168,7 @@ public class GeneticAlgorithm extends Stochastic{
 			}
 		}return -1;
 	}
-	public void afficheTableau(int[] a) {
+	public void arrayToString(int[] a) {
 		for(int i=0;i<a.length; i++) {
 			System.out.print(a[i]+" ");
 		}

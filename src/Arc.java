@@ -19,9 +19,11 @@ public class Arc {
 	public int getSommet1() {
 		return sommet1;
 	}
+	public int getSommet2() {
+		return sommet2;
+	}
 
     public boolean equals(Arc c) {
-
         // Compare the data members and return accordingly 
         return (this.sommet1==c.sommet1 && this.sommet2==c.sommet2 && this.valeur==c.valeur)
         		|| (this.sommet1==c.sommet2 && this.sommet2==c.sommet1 && this.valeur==c.valeur);
@@ -38,22 +40,6 @@ public class Arc {
 	public String toString() {
 		return "Arc [sommet1=" + sommet1 + ", sommet2=" + sommet2 + ", valeur=" + valeur + "]\n";
 	}
-
-
-	public void setSommet1(int sommet1) {
-		this.sommet1 = sommet1;
-	}
-
-
-	public int getSommet2() {
-		return sommet2;
-	}
-
-
-	public void setSommet2(int sommet2) {
-		this.sommet2 = sommet2;
-	}
-
 
 	public void setValeur(int valeur) {
 		this.valeur = valeur;
