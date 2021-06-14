@@ -8,16 +8,16 @@ import java.util.Random;
  */
 public class Graph {
 	
-	/** The matrice. */
+	/** The matrice represents the cities and the distances between them. */
 	private int[][] matrice;
 	
-	/** The taille. */
+	/** The taille represents the size of matrice */
 	private int taille;
 	
 	/** The Arcs. */
 	private ArrayList<Arc> Arcs = new ArrayList<>();
 	
-	/** The current. */
+	/** The current represent the current state */
 	private ArrayList<Arc> current = new ArrayList<>();
 	
 	/** The neighbors of current. */

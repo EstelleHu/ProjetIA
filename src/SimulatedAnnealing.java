@@ -2,7 +2,7 @@ import java.util.*;
 
 
 /**
- * The Class SimulatedAnnealing.
+ * The Class SimulatedAnnealing represents the Simulated annealing algorithm.
  */
 public class SimulatedAnnealing {
     // Simulated Annealing parameters

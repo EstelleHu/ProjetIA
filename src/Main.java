@@ -1,6 +1,6 @@
 
 /**
- * The Class Main.
+ * The Class Main tests all the algorithms.
  */
 public class Main {
 	

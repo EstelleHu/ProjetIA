@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 /**
- * The Class Stochastic.
+ * The Class Stochastic represents Stochastic hill climbing algorithm version to solve the Traveling Salesman Problem.
  */
 public class Stochastic extends HillClimbing{
 	

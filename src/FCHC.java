@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 /**
- * The Class FCHC.
+ * The Class FCHC represents the First Choice Hill Climbing algorithm version to solve the Traveling Salesman Problem.
  */
 public class FCHC extends HillClimbing {
     

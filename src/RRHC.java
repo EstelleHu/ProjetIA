@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 /**
- * The Class RRHC.
+ * The Class RRHC represents the Random-restart hill climbing algorithm version to solve the Traveling Salesman Problems.
  */
 public class RRHC extends HillClimbing {
     

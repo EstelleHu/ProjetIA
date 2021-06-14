@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 /**
- * The Class HillClimbing.
+ * The Class HillClimbing represents the Hill Climbing Algorithm version to solve the Traveling Salesman Problem.
  */
 public class HillClimbing {
 	

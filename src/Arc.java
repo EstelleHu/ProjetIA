@@ -1,7 +1,7 @@
 
 
 /**
- * The Class Arc.
+ * The Class Arc represents the distance between 2 cities.
  */
 public class Arc {
 		

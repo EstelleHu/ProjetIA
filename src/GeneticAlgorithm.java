@@ -4,7 +4,7 @@ import java.util.Random;
 
 
 /**
- * The Class GeneticAlgorithm.
+ * The Class GeneticAlgorithm represents the Genetic Algorithm version to solve the Traveling Salesman Problem.
  */
 public class GeneticAlgorithm extends Stochastic{
 	

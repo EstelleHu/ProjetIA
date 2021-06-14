@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 /**
- * The Class LBS.
+ * The Class LBS represents the Local beam search Algorithm version to solve the Traveling Salesman Problem.
  */
 public class LBS { /**
   * LBS algorithm.
