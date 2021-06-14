@@ -1,6 +1,17 @@
 import java.util.ArrayList;
 
+
+/**
+ * The Class FCHC.
+ */
 public class FCHC extends HillClimbing {
+    
+    /**
+     * F csearch.
+     *
+     * @param g the g
+     * @return the array list
+     */
     //First choice hill climbing
     public ArrayList<Arc> FCsearch(Graph g) {
         int i=1;
