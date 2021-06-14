@@ -2,13 +2,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+
+/**
+ * The Class Graph.
+ */
 public class Graph {
+	
+	/** The matrice. */
 	private int[][] matrice;
+	
+	/** The taille. */
 	private int taille;
+	
+	/** The Arcs. */
 	private ArrayList<Arc> Arcs = new ArrayList<>();
+	
+	/** The current. */
 	private ArrayList<Arc> current = new ArrayList<>();
+	
+	/** The neighbors of current. */
 	private ArrayList<ArrayList<Arc>> neighborsOfCurrent;
 	
+	/**
+	 * Instantiates a new graph.
+	 *
+	 * @param n the n
+	 */
 	public Graph(int n) {
 		this.taille = n+4;
 		this.matrice = new int[taille][taille];
@@ -38,6 +57,10 @@ public class Graph {
 		}
 		current.add(getArcLink(0, taille - 1, Arcs));
 	}
+	
+	/**
+	 * Randomize current.
+	 */
 	public void randomizeCurrent() {
 		current =new ArrayList<>();
 		int i=0;
@@ -48,6 +71,11 @@ public class Graph {
 		}
 	}
 
+	/**
+	 * Choose current randomly.
+	 *
+	 * @return the array list
+	 */
 	public ArrayList<Arc> chooseCurrentRandomly() {
 		ArrayList<Arc> chosen = new ArrayList<>();
 		int[] statesId =new int[taille];
@@ -71,6 +99,14 @@ public class Graph {
 		return chosen;
 	}
 
+	/**
+	 * Gets the arc link.
+	 *
+	 * @param sommet1 the sommet 1
+	 * @param sommet2 the sommet 2
+	 * @param ArcList the arc list
+	 * @return the arc link
+	 */
 	public Arc getArcLink(int sommet1, int sommet2, ArrayList<Arc> ArcList) {
 		for(Arc a : ArcList) {
 			if((a.getSommet1()==sommet1 && a.getSommet2()==sommet2) || (a.getSommet1()==sommet2 && a.getSommet2()==sommet1)) {
@@ -79,11 +115,22 @@ public class Graph {
 		}
 		return null;
 	}
+	
+	/**
+	 * Gets the taille.
+	 *
+	 * @return the taille
+	 */
 	public int getTaille() {
 		return taille;
 	}
 	
 	
+	/**
+	 * Two opt.
+	 *
+	 * @return the array list
+	 */
 	public ArrayList<Arc> twoOpt (){
 		int MAX = taille;
 		int i1, i2;
@@ -112,6 +159,12 @@ public class Graph {
 		
 		
 	}
+	
+	/**
+	 * Two opt neighbors.
+	 *
+	 * @return the array list
+	 */
 	public ArrayList<ArrayList<Arc>> twoOptNeighbors(){
 		this.neighborsOfCurrent = new ArrayList<>();
 		for(int i=0; i<current.size();i++) {
@@ -138,6 +191,13 @@ public class Graph {
 		}
 		return neighborsOfCurrent;
 	}
+	
+	/**
+	 * Two opt neighbors of.
+	 *
+	 * @param cur the cur
+	 * @return the array list
+	 */
 	public ArrayList<ArrayList<Arc>> twoOptNeighborsOf(ArrayList<Arc> cur){
 		this.neighborsOfCurrent = new ArrayList<>();
 		for(int i=0; i<cur.size();i++) {
@@ -165,11 +225,19 @@ public class Graph {
 		return neighborsOfCurrent;
 	}
 	
+	/**
+	 * Gets the neighbors of current.
+	 *
+	 * @return the neighbors of current
+	 */
 	public ArrayList<ArrayList<Arc>> getNeighborsOfCurrent() {
 		return neighborsOfCurrent;
 	}
 
 
+	/**
+	 * Affiche.
+	 */
 	public void affiche() {
 		for (int l=0; l<taille; l++) {
 			for(int c=0; c<taille; c++) {
@@ -180,19 +248,40 @@ public class Graph {
 	}
 
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return "Graphe [matrice=" + Arrays.toString(matrice) + ", taille=" + taille + ", Arcs=" + Arcs + ", current="
 				+ current + ", scoreCurrent= ]";
 	}
 
+	/**
+	 * Gets the matrice.
+	 *
+	 * @return the matrice
+	 */
 	public int[][] getMatrice() {
 		return matrice;
 	}
+	
+	/**
+	 * Gets the current.
+	 *
+	 * @return the current
+	 */
 	public ArrayList<Arc>  getCurrent(){
 		return this.current;
 	}
 
+	/**
+	 * Sets the current.
+	 *
+	 * @param neighbor the new current
+	 */
 	public void setCurrent(ArrayList<Arc> neighbor) {
 		int i=0;
 		for (Arc c: neighbor){
@@ -200,6 +289,13 @@ public class Graph {
 			i++;
 		}
 	}
+	
+	/**
+	 * Heuristic.
+	 *
+	 * @param current the current
+	 * @return the int
+	 */
 	public static int heuristic(ArrayList<Arc> current) {
 		int somme = 0;
 		for(Arc a : current) {

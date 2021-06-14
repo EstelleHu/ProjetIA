@@ -2,16 +2,37 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+
+/**
+ * The Class GeneticAlgorithm.
+ */
 public class GeneticAlgorithm extends Stochastic{
+	
+	/** The g. */
 	private Graph g;
+	
+	/** The population. */
 	private ArrayList<ArrayList<Arc>> population = new ArrayList<>();
 
+	/**
+	 * Instantiates a new genetic algorithm.
+	 *
+	 * @param k the k
+	 * @param g the g
+	 */
 	public GeneticAlgorithm(int k, Graph g) {
 		this.g = g;
 		for(int i=0; i<k; i++) {
 			this.population.add(g.chooseCurrentRandomly());
 		}
 	}
+	
+	/**
+	 * Genetic search.
+	 *
+	 * @param population the population
+	 * @return the array list
+	 */
 	public ArrayList<Arc> geneticSearch (ArrayList<ArrayList<Arc>> population){
 
 			
@@ -26,17 +47,28 @@ public class GeneticAlgorithm extends Stochastic{
 
 		return minPath;
 	}
+	
+	/**
+	 * Gets the population.
+	 *
+	 * @return the population
+	 */
 	public ArrayList<ArrayList<Arc>> getPopulation() {
 		return population;
 	}
 
+	/**
+	 * Selection.
+	 *
+	 * @return the array list
+	 */
 	public ArrayList<ArrayList<Arc>> selection(){
 		ArrayList<ArrayList<Arc>> couples = new ArrayList<>();
 		RandomSelector r = new RandomSelector();
 		Iterator<ArrayList<Arc>> it = this.population.iterator();
 		while(it.hasNext())
-			r.add(heuristic(it.next())); //r va choisir un ï¿½lï¿½ment
-		// alï¿½atoirement proportionnellement aux valeurs de fitness.
+			r.add(heuristic(it.next())); //r va choisir un élément
+		// aléatoirement proportionnellement aux valeurs de fitness.
 
 		for(int i = 0;i<this.population.size()/2; i++) {
 			//premier parent
@@ -54,9 +86,14 @@ public class GeneticAlgorithm extends Stochastic{
 		//System.out.println("Couples size = "+couples.size());
 		return couples;
 	}
+	
+	/**
+	 * Crossover.
+	 *
+	 * @param nb the nb
+	 * @return the array list
+	 */
 	public ArrayList<ArrayList<Arc>> crossover(int nb){
-		
-		
 		ArrayList<ArrayList<Arc>> newPopList = new ArrayList<>();
 		ArrayList<ArrayList<Arc>> parents = new ArrayList<>();
 		for(int u=0; u<nb;u++) {
@@ -152,6 +189,11 @@ public class GeneticAlgorithm extends Stochastic{
 		return newPopList;
 	}
 	
+	/**
+	 * Mutation.
+	 *
+	 * @param child the child
+	 */
 	public void mutation (int[] child) {
 		Random random = new Random();
 		int a = random.nextInt(child.length);
@@ -173,6 +215,13 @@ public class GeneticAlgorithm extends Stochastic{
 		}
 	}
 
+	/**
+	 * Contains.
+	 *
+	 * @param tab the tab
+	 * @param sommet the sommet
+	 * @return the int
+	 */
 	public int contains(int[] tab, int sommet) {
 		for (int i=0; i<tab.length;i++) {
 			if(tab[i]==sommet) {
@@ -180,6 +229,12 @@ public class GeneticAlgorithm extends Stochastic{
 			}
 		}return -1;
 	}
+	
+	/**
+	 * Array to string.
+	 *
+	 * @param a the a
+	 */
 	public void arrayToString(int[] a) {
 		for(int i=0;i<a.length; i++) {
 			System.out.print(a[i]+" ");
@@ -187,6 +242,12 @@ public class GeneticAlgorithm extends Stochastic{
 		System.out.println();
 	}
 	
+	/**
+	 * Arcs to array.
+	 *
+	 * @param list the list
+	 * @return the int[]
+	 */
 	public int[] ArcsToArray(ArrayList<Arc> list) {
 		int[] tab = new int[list.size()];
 		tab[0]=list.get(0).getSommet1();
@@ -203,11 +264,24 @@ public class GeneticAlgorithm extends Stochastic{
 		}
 		return tab;
 	}
+	
+	/**
+	 * Initialize to minus one.
+	 *
+	 * @param tab the tab
+	 */
 	public void initializeToMinusOne(int[] tab) {
 		for(int i=0; i<tab.length;i++) {
 			tab[i]=-1;
 		}
 	}
+	
+	/**
+	 * Array to arcs.
+	 *
+	 * @param tab the tab
+	 * @return the array list
+	 */
 	public ArrayList<Arc> ArrayToArcs(int[] tab) {
 		ArrayList<Arc> arcs = new ArrayList<>();
 		for(int i=0;i<tab.length-1;i++) {

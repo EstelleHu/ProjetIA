@@ -1,4 +1,14 @@
+
+/**
+ * The Class Main.
+ */
 public class Main {
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main (String[] args) {
 		int n= 2;
 		Graph g = new Graph(n);

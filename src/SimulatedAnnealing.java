@@ -1,19 +1,33 @@
 import java.util.*;
 
+
+/**
+ * The Class SimulatedAnnealing.
+ */
 public class SimulatedAnnealing {
     // Simulated Annealing parameters
 
+    /** The Constant Tmin. */
     // Temperature at which iteration terminates
     static final double Tmin = 0.0001;
 
+    /** The Constant alpha. */
     // Decrease in temperature
     static final double alpha = 0.9;
 
     // Number of iterations of annealing
+    /** The Constant numIterations. */
     // before decreasing temperature
     static final int numIterations = 25;
 
 
+    /**
+     * Simulated annealing search.
+     *
+     * @param g the g
+     * @param startingTemperature the starting temperature
+     * @return the array list
+     */
     public ArrayList<Arc> simulatedAnnealingSearch(Graph g,double startingTemperature){
         ArrayList<Arc> current = g.getCurrent();
         ArrayList<Arc> next;

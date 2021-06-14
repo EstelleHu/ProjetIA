@@ -1,6 +1,17 @@
 import java.util.ArrayList;
 
+
+/**
+ * The Class RRHC.
+ */
 public class RRHC extends HillClimbing {
+    
+    /**
+     * R rsearch.
+     *
+     * @param g the g
+     * @return the array list
+     */
     public ArrayList<Arc> RRsearch(Graph g) {
         ArrayList<Arc> lastChosen= new ArrayList<>();
         ArrayList<Arc> res = HCsearch(g);

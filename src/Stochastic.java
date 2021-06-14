@@ -1,7 +1,17 @@
 import java.util.ArrayList;
 
+
+/**
+ * The Class Stochastic.
+ */
 public class Stochastic extends HillClimbing{
 	
+	/**
+	 * Stoc search.
+	 *
+	 * @param g the g
+	 * @return the array list
+	 */
 	public ArrayList<Arc> stocSearch(Graph g){
 //		System.out.println( "CURRENT :"+g.getCurrent());
 		int i=1;

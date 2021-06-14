@@ -1,7 +1,17 @@
 import java.util.ArrayList;
 
+
+/**
+ * The Class HillClimbing.
+ */
 public class HillClimbing {
 	
+	/**
+	 * Heuristic.
+	 *
+	 * @param current the current
+	 * @return the int
+	 */
 	public int heuristic (ArrayList<Arc> current) {
 		int somme = 0;
 		for(Arc a : current) {
@@ -9,6 +19,13 @@ public class HillClimbing {
 		}
 		return somme;
 	}
+	
+	/**
+	 * H csearch.
+	 *
+	 * @param g the g
+	 * @return the array list
+	 */
 	//HILL CLIMBING SEARCH ALGO
 	public ArrayList<Arc> HCsearch(Graph g) {
 //		System.out.println( "CURRENT :"+g.getCurrent());
@@ -32,6 +49,12 @@ public class HillClimbing {
 		}
 	}
 
+	/**
+	 * Heuristics of neighbors.
+	 *
+	 * @param neighbors the neighbors
+	 * @return the array list
+	 */
 	// Tools
 	public ArrayList<Integer> heuristicsOfNeighbors (ArrayList<ArrayList<Arc>> neighbors){
 		ArrayList<Integer> hList = new ArrayList<>();
@@ -40,6 +63,14 @@ public class HillClimbing {
 		}
 		return hList;
 	}
+	
+	/**
+	 * Pos of smaller path neighbor.
+	 *
+	 * @param hcurrent the hcurrent
+	 * @param hList the h list
+	 * @return the int
+	 */
 	public int posOfSmallerPathNeighbor(int hcurrent, ArrayList<Integer> hList) {
 		int pos = -1;
 		int minH = hcurrent;
@@ -51,6 +82,14 @@ public class HillClimbing {
 		}
 		return pos;
 	}
+	
+	/**
+	 * Pos of neighbor.
+	 *
+	 * @param hcurrent the hcurrent
+	 * @param hList the h list
+	 * @return the int
+	 */
 	public int posOfNeighbor(int hcurrent, ArrayList<Integer> hList) {
 		ArrayList<Integer> pos = new ArrayList<Integer>();
 		for(int i=0; i<hList.size();i++) {

@@ -1,6 +1,17 @@
 import java.util.ArrayList;
 
-public class LBS { // NB faut lui donner un goal ?
+
+/**
+ * The Class LBS.
+ */
+public class LBS { /**
+  * LBS algorithm.
+  *
+  * @param k the k
+  * @param g the g
+  * @return the array list
+  */
+ // NB faut lui donner un goal ?
     public ArrayList<Arc> LBSAlgorithm(int k, Graph g) {
         //selects randomly k states
         int e = 0;
@@ -33,6 +44,12 @@ public class LBS { // NB faut lui donner un goal ?
         }
     }
 
+    /**
+     * Best of all.
+     *
+     * @param currentStates the current states
+     * @return the array list
+     */
     private ArrayList<Arc> bestOfAll(ArrayList<ArrayList<Arc>> currentStates) {
         ArrayList<Arc> min = currentStates.get(0);
         int i = 1;
@@ -46,6 +63,13 @@ public class LBS { // NB faut lui donner un goal ?
         return min;
     }
 
+    /**
+     * Compare.
+     *
+     * @param bestNeighbours the best neighbours
+     * @param currentStates the current states
+     * @return true, if successful
+     */
     private boolean compare(ArrayList<ArrayList<Arc>> bestNeighbours, ArrayList<ArrayList<Arc>> currentStates) {
         for (ArrayList<Arc> neighbour : bestNeighbours) {
             for (ArrayList<Arc> currentState : currentStates) {
@@ -58,6 +82,13 @@ public class LBS { // NB faut lui donner un goal ?
         return true;
     }
 
+    /**
+     * Compare and choose k best.
+     *
+     * @param k the k
+     * @param neighbours the neighbours
+     * @return the array list
+     */
     private ArrayList<ArrayList<Arc>> compareAndChoose_k_Best(int k, ArrayList<ArrayList<Arc>> neighbours) {
         ArrayList<ArrayList<Arc>> res = new ArrayList<>(k);
         while (res.size() < k) {
@@ -81,6 +112,14 @@ public class LBS { // NB faut lui donner un goal ?
             }
             return res;
     }
+    
+    /**
+     * List contains.
+     *
+     * @param res the res
+     * @param arc the arc
+     * @return true, if successful
+     */
     private boolean listContains(ArrayList<ArrayList<Arc>> res, ArrayList<Arc> arc) {
         for(ArrayList<Arc> arcOfRes : res){
             if(arcOfRes.equals(arc))
