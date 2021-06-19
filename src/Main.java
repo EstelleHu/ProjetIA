@@ -87,14 +87,14 @@ public class Main {
 		startTime = endTime;
 
 		//Local Beam Search Test
-//		System.out.println("\n \n    ************TESTING Local Beam SEARCH ***********        \n");
-//		int k = 2;
-//		System.out.println(" We select " + k + " cities");
-//		System.out.println(localBeam.LBSAlgorithm(k, g));
-//		endTime = System.currentTimeMillis();
-//		seconds = (endTime - startTime) / 1000F;
-//		System.out.println("\n \n    *****//******END OF TEST [Local Beam SEARCH] after " + Float.toString(seconds) + " seconds. ****//*****        \n");
-//
+		System.out.println("\n \n    ************TESTING Local Beam SEARCH ***********        \n");
+		int k = 2;
+		System.out.println(" We select " + k + " cities");
+		System.out.println(localBeam.LBSAlgorithm(k, g));
+		endTime = System.currentTimeMillis();
+		seconds = (endTime - startTime) / 1000F;
+		System.out.println("\n \n    *****//******END OF TEST [Local Beam SEARCH] after " + Float.toString(seconds) + " seconds. ****//*****        \n");
+
 
 	}
 	/**
@@ -107,13 +107,13 @@ public class Main {
 		//BLOC 1 : test with n =5
 		System.out.println("TEST 1 WITH 5 cities");
 		 // HERE WE GENERATE THE GRAPH ON WHICH WE WILL MAKE TESTS
-		Graph g = new Graph(96); // size of graph equal to 1+4
-		testAllWithSize(96,g);
+		Graph g = new Graph(1); // size of graph equal to 1+4
+		testAllWithSize(1,g);
 		System.out.println("END OF TEST 1");
 		//END OF BLOC 1
 
 		//BLOC 2 : changing the number n of cities on the graph
-		/**System.out.println("TEST 2 WITH different number of cities");
+		/*System.out.println("TEST 2 WITH different number of cities");
 		int[] sizes = new int[3];
 		sizes[0]=-1;
 		sizes[1]=-1;
@@ -140,21 +140,21 @@ public class Main {
 			Graph g = new Graph(sizes[i]-4);
 			testAllWithSize(sizes[i],g);
 		}
-		System.out.println("END OF TEST 2");**/
+		System.out.println("END OF TEST 2");*/
 		//END OF BLOC 2
 
 		//FOR THE REMAINING TESTS, PLEASE UNCOMMENT THIS BLOC :
-		/**int n= 10;
+		/*int n= 10;
 		Graph g = new Graph(n-4);
 		LBS localBeam = new LBS();
 		System.out.println("***************** TESTING WITH GRAPH SIZE = " + n + " *******************");
 		System.out.println("   THE GRAPH'S MATRIX :\n");
-		g.affiche();**/
+		g.affiche();*/
 
 		//END OF THE BLOC
 
 		//BLOC 3: testing Local Beam Search with different number k of selected cities
-		/**System.out.println("\n \n    ************TESTING Local Beam SEARCH with different k ***********        \n");
+		/*System.out.println("\n \n    ************TESTING Local Beam SEARCH with different k ***********        \n");
 		System.out.println("TEST 3 WITH different number of cities");
 		int[] LBSk= new int[3];
 		LBSk[0] =-1;
@@ -186,14 +186,14 @@ public class Main {
 			System.out.println(localBeam.LBSAlgorithm(LBSk[o], g));
 			endTime = System.currentTimeMillis();
 			seconds = (endTime - startTime) / 1000F;
-			System.out.println("\n \n    *****//******END OF TEST [Local Beam SEARCH] with k="+LBSk[o]+" after " + Float.toString(seconds) + " seconds. ****//*****        \n");
+			System.out.println("\n \n    ***********END OF TEST [Local Beam SEARCH] with k="+LBSk[o]+" after " + Float.toString(seconds) + " seconds. *********        \n");
 			startTime = endTime;
 		}
-		System.out.println("END OF TEST 3");**/
+		System.out.println("END OF TEST 3");*/
 		//END OF TEST 3
 
 		//BLOC 4: testing Genetic search algorithm with different size k of population
-		/**System.out.println("\n \n    ************ TESTING Genetic Algorithm with different k ***********        \n");
+		/*System.out.println("\n \n    ************ TESTING Genetic Algorithm with different k ***********        \n");
 		int[] geneticK1= new int[3];
 		geneticK1[0] =-1;
 		geneticK1[1]=-1;
@@ -225,10 +225,10 @@ public class Main {
 			geneticX.geneticSearch(geneticX.crossover(geneticK1[e]));
 			endTime = System.currentTimeMillis();
 			seconds = (endTime - startTime) / 1000F;
-			System.out.println("\n \n    *****//******END OF TEST [Genetic Algorithm] with "+(geneticK1[e])+" after " + Float.toString(seconds) + " seconds. ****//*****        \n");
+			System.out.println("\n \n    ***********END OF TEST [Genetic Algorithm] with "+(geneticK1[e])+" after " + Float.toString(seconds) + " seconds. *********        \n");
 			startTime = endTime;
 		}
-		System.out.println("END OF TEST 4");**/
+		System.out.println("END OF TEST 4");*/
 		//END OF BLOC 4
 
 	}
