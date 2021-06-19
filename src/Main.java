@@ -144,7 +144,7 @@ public class Main {
 		//END OF BLOC 2
 
 		//FOR THE REMAINING TESTS, PLEASE UNCOMMENT THIS BLOC :
-		/*int n= 10;
+		/*int n= 5;
 		Graph g = new Graph(n-4);
 		LBS localBeam = new LBS();
 		System.out.println("***************** TESTING WITH GRAPH SIZE = " + n + " *******************");
