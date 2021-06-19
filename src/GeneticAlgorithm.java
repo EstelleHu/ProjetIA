@@ -38,11 +38,11 @@ public class GeneticAlgorithm extends Stochastic{
 			
 		ArrayList<Arc> minPath = population.get(0);
 		for(int i=1; i<population.size();i++){
-			if(heuristic(population.get(i))<heuristic(minPath)) {
+			if(Graph.pathSize(population.get(i))<Graph.pathSize(minPath)) {
 				minPath=population.get(i);
 			}
 		}
-		System.out.println("Min Path's heuristic = "+ heuristic(minPath));
+		System.out.println("Min Path's size = "+ Graph.pathSize(minPath));
 		System.out.println("Resulting Path= "+ minPath);
 
 		return minPath;
@@ -67,11 +67,9 @@ public class GeneticAlgorithm extends Stochastic{
 		RandomSelector r = new RandomSelector();
 		Iterator<ArrayList<Arc>> it = this.population.iterator();
 		while(it.hasNext())
-			r.add(heuristic(it.next())); //r va choisir un élément
-		// aléatoirement proportionnellement aux valeurs de fitness.
+			r.add(Graph.pathSize(it.next()));
 
 		for(int i = 0;i<this.population.size()/2; i++) {
-			//premier parent
 			int posX = r.randomChoice();
 			int posY;
 			ArrayList<Arc> x = this.population.get(posX);
@@ -79,7 +77,7 @@ public class GeneticAlgorithm extends Stochastic{
 			do {
 				posY = r.randomChoice();
 				y = this.population.get(posY);
-			}while(posX==posY); //Ne doit pas etre le meme
+			}while(posX==posY);
 			couples.add(x);
 			couples.add(y);
 		}
@@ -163,10 +161,10 @@ public class GeneticAlgorithm extends Stochastic{
 						}
 					}
 					Random random = new Random();
-					if(random.nextInt(10) == 9){ //1 chance sur 10 que l'enfant fasse une mutation
+					if(random.nextInt(10) == 9){
 						mutation(firstChild);
 					}
-					if(random.nextInt(10) == 9){ //1 chance sur 10 que l'enfant fasse une mutation
+					if(random.nextInt(10) == 9){
 						mutation(secondChild);
 					}
 					newPop[i]=firstChild;

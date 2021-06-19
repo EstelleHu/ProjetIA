@@ -1,3 +1,4 @@
+import java.security.AllPermission;
 import java.util.ArrayList;
 
 
@@ -34,12 +35,16 @@ public class LBS { /**
                     }
                 }
             }
-            //selects k best neighbors and copares their heuristics to those of the k current paths
-            ArrayList<ArrayList<Arc>> bestNeighbours = compareAndChoose_k_Best(k, neighbours);
+            //selects k best neighbours and compares their path sizes to those of the k current paths
+
+
+            ArrayList<ArrayList<Arc>> bestNeighbours  = compareAndChoose_k_Best(g.getTaille(),k, neighbours);
+
             // if none of the K best selected is better than all of the current paths, we return the best of currents
             if (compare(bestNeighbours, currentStates)) {
                 return bestOfAll(currentStates);
             }
+            System.out.println("Passing best neighbours selected to be current states");
             currentStates = bestNeighbours;
         }
     }
@@ -54,12 +59,12 @@ public class LBS { /**
         ArrayList<Arc> min = currentStates.get(0);
         int i = 1;
         while (i < currentStates.size()) {
-            if (Graph.heuristic(currentStates.get(i)) < Graph.heuristic(min)) {
+            if (Graph.pathSize(currentStates.get(i)) < Graph.pathSize(min)) {
                 min = currentStates.get(i);
             }
             i++;
         }
-        System.out.println("BEST OF ALL MIN " + Graph.heuristic(min));
+        System.out.println("BEST OF ALL MIN " + Graph.pathSize(min));
         return min;
     }
 
@@ -71,14 +76,37 @@ public class LBS { /**
      * @return true, if successful
      */
     private boolean compare(ArrayList<ArrayList<Arc>> bestNeighbours, ArrayList<ArrayList<Arc>> currentStates) {
+        if (allNeighbourSizesEqualToCurrentOnes(currentStates,bestNeighbours)) {
+            return true;
+        }
         for (ArrayList<Arc> neighbour : bestNeighbours) {
             for (ArrayList<Arc> currentState : currentStates) {
-                if (Graph.heuristic(neighbour) < Graph.heuristic(currentState)) {
+                if (Graph.pathSize(neighbour) < Graph.pathSize(currentState)) {
                     return false;
                 }
             }
         }
         //none of the neighbours is better then the current ones
+        return true;
+    }
+    /**
+     * Looks if none of the neighbours has a better size than the currentOnes.
+     *
+     * @param bestNeighbours the best neighbours
+     * @param currentStates the current states
+     * @return true, if successful
+     */
+    private boolean allNeighbourSizesEqualToCurrentOnes(ArrayList<ArrayList<Arc>> currentStates, ArrayList<ArrayList<Arc>> bestNeighbours) {
+        ArrayList<Integer> currentStatesSizes = new ArrayList<Integer>();
+        for (ArrayList<Arc> currentState : currentStates) {
+            currentStatesSizes.add(Graph.pathSize(currentState));
+        }
+        for (ArrayList<Arc> neighbour : bestNeighbours) {
+            if (!currentStatesSizes.contains(Graph.pathSize(neighbour))) {
+                return false;
+            }
+        }
+        //the two lists are equal
         return true;
     }
 
@@ -89,26 +117,30 @@ public class LBS { /**
      * @param neighbours the neighbours
      * @return the array list
      */
-    private ArrayList<ArrayList<Arc>> compareAndChoose_k_Best(int k, ArrayList<ArrayList<Arc>> neighbours) {
+    private ArrayList<ArrayList<Arc>> compareAndChoose_k_Best(int n,int k, ArrayList<ArrayList<Arc>> neighbours) {
         ArrayList<ArrayList<Arc>> res = new ArrayList<>(k);
-        while (res.size() < k) {
+        while (res.size() != k ) {
+//            System.out.println("List size : "+res.size()+" on "+k);
             ArrayList<Arc> min = neighbours.get(0);
             int i = 1;
-            System.out.println("LOOKING FOR " + (res.size() + 1) + " BEST ELEMENT");
+//            System.out.println("LOOKING FOR " + (res.size() + 1) + " BEST ELEMENT");
+
             while (i < neighbours.size()) {
-//                System.out.println("Comparing min " + Graphe.heuristic(min) + " to " + Graphe.heuristic(neighbours.get(i)));
+//                System.out.println("Comparing min " + Graph.pathSize(min) + " to " + Graph.pathSize(neighbours.get(i)));
                 if (res.size() > 0 && listContains(res, neighbours.get(i))) {
                     i++;
-                } else if (Graph.heuristic(neighbours.get(i)) < Graph.heuristic(min)) {
+                } else if (Graph.pathSize(neighbours.get(i)) < Graph.pathSize(min)) {
                     min = neighbours.get(i);
                 }
                 i++;
             }
             res.add(min);
         }
-            System.out.println("K best neighbors in the list : ");
-            for (int u = 0; u < res.size(); u++) {
-                System.out.println(" " + u + "  : " + res.get(u) + " : " + Graph.heuristic(res.get(u)));
+            if(n<25){
+                System.out.println("K best neighbors in the list : ");
+                for (int u = 0; u < res.size(); u++) {
+                    System.out.println(" " + u + "  : " + res.get(u) + " : " + Graph.pathSize(res.get(u)));
+                }
             }
             return res;
     }

@@ -18,7 +18,7 @@ public class SimulatedAnnealing {
     // Number of iterations of annealing
     /** The Constant numIterations. */
     // before decreasing temperature
-    static final int numIterations = 25;
+    static final int numIterations = 50;
 
 
     /**
@@ -37,19 +37,19 @@ public class SimulatedAnnealing {
             while (T > Tmin) {
                 g.setCurrent(current);
                 next = g.twoOpt(); // random neighbor of current
-//                System.out.println("Variables : \n T : " + T + "\n current's heuristic :" + (Graphe.heuristic(current) * 0.01) + "\n next path's heurostic : " + (Graphe.heuristic(next) * 0.01));
+//                System.out.println("Variables : \n T : " + T + "\n current's path size :" + (Graphe.pathSize(current) * 0.01) + "\n next path's path size : " + (Graphe.pathSize(next) * 0.01));
 
-                if ((Graph.heuristic(current) * 0.01) > (Graph.heuristic(next) * 0.01))
+                if ((Graph.pathSize(current) * 0.01) > (Graph.pathSize(next) * 0.01))
                     current = next;
-                else if (Math.pow(Math.E, ((Graph.heuristic(next) * 0.01) - (Graph.heuristic(current) * 0.01) / T)) < Math.random()) {
-//                    System.out.println("prob :" + Math.pow(Math.E, ((Graphe.heuristic(next) * 0.01) - (Graphe.heuristic(current) * 0.01) / T)));
+                else if (Math.pow(Math.E, ((Graph.pathSize(next) * 0.01) - (Graph.pathSize(current) * 0.01) / T)) < Math.random()) {
+//                    System.out.println("prob :" + Math.pow(Math.E, ((Graphe.pathSize(next) * 0.01) - (Graphe.pathSize(current) * 0.01) / T)));
                     current = next;
                 }
                 T *= alpha;
             }
         }
         System.out.println("Result OF Simulated Annealing ALGO  :"+current);
-        System.out.println("Path length " + Graph.heuristic(current));
+        System.out.println("Path length " + Graph.pathSize(current));
         return current;
     }
 }

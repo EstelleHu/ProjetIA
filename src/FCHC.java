@@ -14,17 +14,17 @@ public class FCHC extends HillClimbing {
      */
     //First choice hill climbing
     public ArrayList<Arc> FCsearch(Graph g) {
-        int i=1;
+//        int i=1;
         while (true){
             ArrayList<Arc> neighbor =  g.twoOpt();
-            System.out.println( "Step "+i+" : ");
-            System.out.println("Current heuristic "+heuristic(g.getCurrent()) +" VS neighbor heuristic "+heuristic(neighbor));
-            if(heuristic(g.getCurrent())<= heuristic(neighbor) ){
+//            System.out.println( "Step "+i+" : ");
+//            System.out.println("Current path size "+Graph.pathSize(g.getCurrent()) +" VS neighbor path size "+Graph.pathSize(neighbor));
+            if(Graph.pathSize(g.getCurrent())<= Graph.pathSize(neighbor) ){
                 System.out.println("Resulting path of FIRST CHOICE HILL CLIMBING SEARCH algorithm :\n"+g.getCurrent());
-                System.out.println("Path's length = "+ heuristic(g.getCurrent()));
+                System.out.println("Path's length = "+ Graph.pathSize(g.getCurrent()));
                 return g.getCurrent();
             }
-            i++;
+//            i++;
             g.setCurrent( neighbor);
         }
     }

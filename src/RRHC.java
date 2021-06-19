@@ -23,11 +23,11 @@ public class RRHC extends HillClimbing {
         while (true) {
             g.setCurrent(g.chooseCurrentRandomly());
             ArrayList<Arc> resOfHC = HCsearch(g);
-            System.out.println("COMPARING DISTANCES : " + Graph.heuristic(lastChosen) + " with " + Graph.heuristic(resOfHC));
-            if (Graph.heuristic(lastChosen) <= Graph.heuristic(resOfHC)) {
-                System.out.println("END of Random-restart hill climbing research  :");
+//            System.out.println("COMPARING DISTANCES : " + Graph.pathSize(lastChosen) + " with " + Graph.pathSize(resOfHC));
+            if (Graph.pathSize(lastChosen) <= Graph.pathSize(resOfHC)) {
+//                System.out.println("END of Random-restart hill climbing research  :");
                 System.out.println("Resulting Path :\n" + lastChosen);
-                System.out.println("Path length " + Graph.heuristic(lastChosen));
+                System.out.println("Path length " + Graph.pathSize(lastChosen));
                 return lastChosen;
             }
             int k=0;

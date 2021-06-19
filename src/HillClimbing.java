@@ -5,20 +5,7 @@ import java.util.ArrayList;
  * The Class HillClimbing represents the Hill Climbing Algorithm version to solve the Traveling Salesman Problem.
  */
 public class HillClimbing {
-	
-	/**
-	 * Heuristic.
-	 *
-	 * @param current the current
-	 * @return the int
-	 */
-	public int heuristic (ArrayList<Arc> current) {
-		int somme = 0;
-		for(Arc a : current) {
-			somme = somme + a.getValeur();
-		}
-		return somme;
-	}
+
 	
 	/**
 	 * H csearch.
@@ -32,34 +19,34 @@ public class HillClimbing {
 		int i=1;
 		while (true){
 			g.twoOptNeighbors();
-			System.out.println( "Step "+i+ ":");
-			ArrayList<Integer> hList = heuristicsOfNeighbors(g.getNeighborsOfCurrent());
-			System.out.println("Current heuristic "+heuristic(g.getCurrent()) +" VS neighbor heuristic "+hList);
+//			System.out.println( "Step "+i+ ":");
+			ArrayList<Integer> hList = pathSizesOfNeighbors(g.getNeighborsOfCurrent());
+//			System.out.println("Current path sizes "+Graph.pathSize(g.getCurrent()) +" VS neighbor path size "+hList);
 
 			i++;
-			int chosenNeighbor = posOfSmallerPathNeighbor(heuristic(g.getCurrent()),hList);
+			int chosenNeighbor = posOfSmallerPathNeighbor(Graph.pathSize(g.getCurrent()),hList);
 			if(chosenNeighbor==-1) {
 				System.out.println("Resulting path of HILL CLIMBING SEARCH algorithm :\n"+g.getCurrent());
-				System.out.println("Path's length = "+ heuristic(g.getCurrent()));
+				System.out.println("Path's length = "+ Graph.pathSize(g.getCurrent()));
 				return g.getCurrent();
 			}
 			g.setCurrent(g.getNeighborsOfCurrent().get(chosenNeighbor));
-//			System.out.println("Heuristic of neighbor chosen : "+ heuristic(g.getCurrent()));
+//			System.out.println("Path size of neighbor chosen : "+ Graph.pathSize(g.getCurrent()));
 //			System.out.println("neighbor chosen : "+ g.getCurrent());
 		}
 	}
 
 	/**
-	 * Heuristics of neighbors.
+	 * Path sizes of neighbors.
 	 *
 	 * @param neighbors the neighbors
 	 * @return the array list
 	 */
 	// Tools
-	public ArrayList<Integer> heuristicsOfNeighbors (ArrayList<ArrayList<Arc>> neighbors){
+	public ArrayList<Integer> pathSizesOfNeighbors (ArrayList<ArrayList<Arc>> neighbors){
 		ArrayList<Integer> hList = new ArrayList<>();
 		for(int i = 0; i < neighbors.size(); i++) {
-			hList.add(heuristic(neighbors.get(i)));
+			hList.add(Graph.pathSize(neighbors.get(i)));
 		}
 		return hList;
 	}

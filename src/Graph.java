@@ -159,7 +159,7 @@ public class Graph {
 		
 		
 	}
-	
+
 	/**
 	 * Two opt neighbors.
 	 *
@@ -191,7 +191,7 @@ public class Graph {
 		}
 		return neighborsOfCurrent;
 	}
-	
+
 	/**
 	 * Two opt neighbors of.
 	 *
@@ -222,6 +222,7 @@ public class Graph {
 				}
 			}
 		}
+
 		return neighborsOfCurrent;
 	}
 	
@@ -239,9 +240,18 @@ public class Graph {
 	 * Affiche.
 	 */
 	public void affiche() {
+		System.out.print("     ");
 		for (int l=0; l<taille; l++) {
-			for(int c=0; c<taille; c++) {
-				System.out.print(this.matrice[l][c] + " ");
+			System.out.print(l+"    ");
+		}
+		System.out.println();
+		for (int l=0; l<taille; l++) {
+			for(int c=-1; c<taille; c++) {
+				if(c==-1){
+					System.out.print((c+l+1)+"   ");
+				}else{
+					System.out.print( " "+this.matrice[l][c] + " ");
+				}
 			}
 			System.out.println();
 		}
@@ -291,12 +301,12 @@ public class Graph {
 	}
 	
 	/**
-	 * Heuristic.
+	 * PathSize.
 	 *
 	 * @param current the current
 	 * @return the int
 	 */
-	public static int heuristic(ArrayList<Arc> current) {
+	public static int pathSize(ArrayList<Arc> current) {
 		int somme = 0;
 		for(Arc a : current) {
 			somme = somme + a.getValeur();
