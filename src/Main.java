@@ -108,7 +108,7 @@ public class Main {
 		System.out.println("TEST 1 WITH 5 cities");
 		 // HERE WE GENERATE THE GRAPH ON WHICH WE WILL MAKE TESTS
 		Graph g = new Graph(1); // size of graph equal to 1+4
-		testAllWithSize(1,g);
+		testAllWithSize(5,g);
 		System.out.println("END OF TEST 1");
 		//END OF BLOC 1
 
